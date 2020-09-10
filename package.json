@@ -1,0 +1,49 @@
+{
+  "name": "drgc",
+  "version": "0.0.1",
+  "description": "By: Stuart Leitch",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toruitas/https://github.com/Toruitas/django_react_graphql_crm"
+  },
+  "author": "Stuart Leitch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Toruitas/https://github.com/Toruitas/django_react_graphql_crm/issues"
+  },
+  "homepage": "https://github.com/Toruitas/https://github.com/Toruitas/django_react_graphql_crm#readme",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.3.5",
+    "axios": "^0.19.2",
+    "bulma": "^0.8.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "react-three-fiber": "^4.2.4",
+    "react-use-websocket": "^2.0.1",
+    "redux-logger": "^3.0.6",
+    "three": "^0.116.1",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "file-loader": "^6.0.0",
+    "sass": "^1.26.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.2.2"
+  }
+}

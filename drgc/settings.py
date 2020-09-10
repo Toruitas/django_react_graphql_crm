@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'graphene_django',
-    'customers'
+    'customers',
+    'frontend'
 ]
 
 MIDDLEWARE = [
