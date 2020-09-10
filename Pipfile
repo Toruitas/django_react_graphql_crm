@@ -13,6 +13,7 @@ django-graphql-jwt = "*"
 psycopg2 = "*"
 dj-database-url = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
+shortuuid = "*"
 
 [requires]
 python_version = "3.7"
