@@ -7,9 +7,12 @@ function App() {
   return (
     <div className="App">
         <Navbar/>
-        <Suspense fallback={<div>Loading...</div>}>
-            <Switcher/>
-        </Suspense>
+        <div className="hero is-fullheight-with-navbar">
+            <Suspense fallback={<div>Loading...</div>}>
+                <Switcher/>
+            </Suspense>
+        </div>
+        
 
     </div>
   );

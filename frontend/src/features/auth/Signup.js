@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { gql, useMutation } from '@apollo/client';
 import styles from "./Auth.module.scss";
-import {} from './authSlice';
+// import {} from './authSlice';
 
 const SIGNUP_MUTATION = gql`
   mutation CreateUserMutation($username: String!, $email: String!, $password: String!) {
@@ -41,53 +41,71 @@ const SignupForm = () => {
 
     return(
         <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input 
-                id='username'
-                name='username'
-                type='text'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.username}
-            />
-            {formik.touched.username && formik.errors.username ? (
-            <div>{formik.errors.username}</div>
-            ) : null}
+            <div className="field">
+                <label htmlFor="username">Username</label>
+                <div className="control">
+                    <input 
+                        className="input"
+                        id='username'
+                        name='username'
+                        type='text'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.username}
+                    />
+                </div>
+                {formik.touched.username && formik.errors.username ? (
+                <div>{formik.errors.username}</div>
+                ) : null}
+            </div>
+            <div className="field">
             <label htmlFor="email">Email Address</label>
-            <input 
-                id='email'
-                name='email'
-                type='email'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-            />
+            <div className="control">
+                <input 
+                    className="input"
+                    id='email'
+                    name='email'
+                    type='email'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                />
+            </div>
             {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
-            ) : null}
-            <label htmlFor="password">Password</label>
-            <input 
-                id='password'
-                name='password'
-                type='password'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.username}
-            />
-            {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
-            ) : null}
-            <button type="submit">Submit</button>
+                <div>{formik.errors.email}</div>
+                ) : null}
+            </div>
+            <div className="field">
+                <label htmlFor="password">Password</label>
+                <div className="control">
+                    <input 
+                        className="input"
+                        id='password'
+                        name='password'
+                        type='password'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.username}
+                    />
+                </div>
+                {formik.touched.password && formik.errors.password ? (
+                <div>{formik.errors.password}</div>
+                ) : null}
+            </div>
+            <div className="field">
+                <div className="control">
+                    <button className="button is-link" type="submit">Submit</button>
+                </div>
+            </div>
         </form>
     )
 }
 
 export default function Signup(){
      
-
     return (
-        <div>
-            <SignupForm/>
+        <div className={styles.fuckers}>
+            <SignupForm />
         </div>
     )
 }
