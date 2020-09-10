@@ -27,16 +27,18 @@ class CustomerFilter(django_filters.FilterSet):
         fields = ["id","name","business_name","created_at"]
 
 class Query(graphene.ObjectType):
-    customer = graphene.Field(CustomerType, id=graphene.Int(required=True))
+    customer = graphene.Field(CustomerType, lookup_id=graphene.String(required=True))
     customers = graphene.List(CustomerType)
 
-    def resolve_customer(self, info, id, **kwargs):
+    @login_required
+    def resolve_customer(self, info, lookup_id, **kwargs):
         """
         Return a single customer.
         """
-        cust = Customer.objects.get(id)
+        cust = Customer.objects.filter(lookup_id=lookup_id).first()
         return cust
 
+    @login_required
     def resolve_customers(self, info, search=None, first=None, skip=None, **kwargs):
         """
         Return a list of customers according to search parameters. By default it returns ALL.
@@ -64,7 +66,7 @@ class Query(graphene.ObjectType):
 #############
 
 class CreateCustomer(graphene.Mutation):
-    user = graphene.Field(UserType)
+    created_by = graphene.Field(UserType)
     customer = graphene.Field(CustomerType)
 
     class Arguments:
@@ -75,6 +77,7 @@ class CreateCustomer(graphene.Mutation):
         website = graphene.String()
         description = graphene.String()
 
+    @login_required
     def mutate(self, info, name, business_name, phone_number, email, website, description):
         user = info.context.user
 
