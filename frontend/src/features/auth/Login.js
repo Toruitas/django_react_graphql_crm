@@ -6,10 +6,9 @@ import { gql, useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
-
+import {loginAsync, selectLoggedIn} from './authSlice';
 import logo from './generic_logo_lg.png';
 import styles from "./Auth.module.scss";
-import {loginAsync, selectLoggedIn} from './authSlice';
 
 
 const LOGIN_MUTATION = gql`
@@ -90,6 +89,7 @@ const LoginForm = () => {
                 <div>{formik.errors.password}</div>
                 ) : null}
             </div>
+
             {error && (
                 <pre>{error.graphQLErrors.map(({ message }, i) => (
                     <span key={i}>{message}</span>

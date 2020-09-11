@@ -2,23 +2,43 @@ import React, { Component, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import logo from './generic_logo_lg.png';
 import { gql, useMutation } from '@apollo/client';
-import styles from "./Auth.module.scss";
 import { NavLink } from 'react-router-dom';
-// import {} from './authSlice';
+import { useHistory } from 'react-router-dom'
+import {loginAsync, selectLoggedIn} from './authSlice';
+
+import {} from './authSlice';
+import styles from "./Auth.module.scss";
+import logo from './generic_logo_lg.png';
+
+
 
 const SIGNUP_MUTATION = gql`
   mutation CreateUserMutation($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password:$password) {
-      id
-      username
-      email
+      user{
+          id
+          username
+          email
+      }
     }
   }
 `;
 
+const LOGIN_MUTATION = gql`
+mutation TokenAuthMutation($username: String!,  $password: String!) {
+  tokenAuth(username: $username, password:$password) {
+    token
+  }
+}
+`;
+
 const SignupForm = (props) => {
+    const [loginMut, { loading:loginLoading, error:loginError, data:loginData }] = useMutation(LOGIN_MUTATION, {errorPolicy:'all'});
+    const [signupMut, { loading: signupLoading, error: signupError, data: signupData }] = useMutation(SIGNUP_MUTATION, {errorPolicy:'all'});
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues:{
             username:'',
@@ -37,7 +57,32 @@ const SignupForm = (props) => {
               .required('Required'),
           }),
         onSubmit: values =>{
-            alert(JSON.stringify(values, null, 2));
+            signupMut({variables:{
+                username: values.username,
+                email:values.email,
+                password: values.password
+            }
+            }).then(
+                (data)=>{
+                    if(!data.errors){
+                        loginMut({variables:{
+                            username: values.username,
+                            password: values.password
+                        }
+                        }).then(
+                            (data)=>{
+                                if(!data.errors){
+                                    localStorage.setItem('refresh_token', data.data.tokenAuth.token);
+                                    dispatch(loginAsync(loginMut, values, history));
+                                }
+                            }
+                        )
+                        // dispatch message
+                    }else{
+                        console.log(data.errors);
+                    }
+                }
+            )
         }        
     });
 
@@ -94,6 +139,22 @@ const SignupForm = (props) => {
                 <div>{formik.errors.password}</div>
                 ) : null}
             </div>
+
+            {loginError && (
+                <pre>{loginError.graphQLErrors.map(({ message }, i) => (
+                    <span key={i}>{message}</span>
+                ))}
+                </pre>
+            )}
+
+            {signupError && (
+                <pre>{signupError.graphQLErrors.map(({ message }, i) => (
+                    <span key={i}>{message}</span>
+                ))}
+                </pre>
+            )}
+
+        
             <div className="field">
                 <div className="control">
                     <button className="button is-link" type="submit">Submit</button>
