@@ -2,8 +2,10 @@ import React, { Component, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import logo from './generic_logo_lg.png';
 import { gql, useMutation } from '@apollo/client';
 import styles from "./Auth.module.scss";
+import { NavLink } from 'react-router-dom';
 // import {} from './authSlice';
 
 const SIGNUP_MUTATION = gql`
@@ -104,8 +106,16 @@ const SignupForm = () => {
 export default function Signup(){
      
     return (
-        <div className={styles.fuckers}>
-            <SignupForm />
+        <div className={styles.authContainer}>
+            <div>
+                <img src={logo} alt="2-dat CRM" />
+            </div>
+            <div className={styles.authForm}>
+                Sign up to gain access to the least-powerful CRM in existence!
+                <SignupForm />
+                If you've already signed up, please <NavLink to={"/login/"}>login</NavLink>.
+            </div>
+            
         </div>
     )
 }
