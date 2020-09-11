@@ -14,6 +14,7 @@ psycopg2 = "*"
 dj-database-url = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
 shortuuid = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
