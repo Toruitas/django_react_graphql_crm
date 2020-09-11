@@ -39,13 +39,18 @@ const LoginForm = () => {
               .required('Required'),
           }),
         onSubmit: values =>{
-            const refresh_token = loginMut({variables:{
+            loginMut({variables:{
                     username: values.username,
                     password: values.password
                 }
-            });
-            localStorage.setItem('refresh_token', refresh_token);
-            dispatch(loginAsync(loginMut, values, history));
+            }).then(
+                (data)=>{
+                    if(!data.errors){
+                        localStorage.setItem('refresh_token', data.data.tokenAuth.token);
+                        dispatch(loginAsync(loginMut, values, history));
+                    }
+                }
+            )
         }
     });
 
