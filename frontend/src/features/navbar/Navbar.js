@@ -15,10 +15,10 @@ export function Navbar(){
     return (
         <nav className="navbar is-fixed-top is-transparent">
             <div className="navbar-brand">
-                <a className="navbar-item" href="/">
+                <NavLink className="navbar-item" to={"/"}>
                     <img src={logo} alt="2-day CRM" width="112" height="28" />
                     {/* <span id="navbar-brandname">The 2-day CRM</span> */}
-                </a>
+                </NavLink>
                 <div className="navbar-burger burger" data-target="navbarExampleTransparentExample">
                 <span></span>
                 <span></span>

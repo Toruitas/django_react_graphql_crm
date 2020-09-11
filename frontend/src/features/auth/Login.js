@@ -1,10 +1,9 @@
 import React, { Component, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom'
 
 import {loginAsync, selectLoggedIn} from './authSlice';
 import logo from './generic_logo_lg.png';

@@ -28,7 +28,12 @@ class CustomerFilter(django_filters.FilterSet):
 
 class Query(graphene.ObjectType):
     customer = graphene.Field(CustomerType, lookup_id=graphene.String(required=True))
-    customers = graphene.List(CustomerType)
+    customers = graphene.List(
+        CustomerType,
+        search=graphene.String(),
+        first=graphene.Int(),
+        skip=graphene.Int()
+        )
 
     @login_required
     def resolve_customer(self, info, lookup_id, **kwargs):

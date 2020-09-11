@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
+import { createHttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
 import { ApolloProvider, ApolloClient, InMemoryCache  } from '@apollo/client';
 
 import './index.css';
@@ -9,10 +11,24 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
+const httpLink = createHttpLink({ uri: 'http://localhost:8000/graphql/' })
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('refresh_token')
+  // const token = Cookies.get('token') SHOULD BE USING COOKIES FOR BETTER SECURITY
+
+  return {
+    headers: {
+      ...headers,
+      authorization: `JWT ${token}`
+    }
+  }
+})
+
 const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql/',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
-});
+})
 
 ReactDOM.render(
   <ApolloProvider client={client}>
