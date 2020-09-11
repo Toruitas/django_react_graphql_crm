@@ -113,7 +113,7 @@ export default function Login(){
     return (
         <div className={styles.authContainer}>
             <div>
-                <img src={logo} alt="2-day CRM" />
+                <img className={styles.authLogo} src={logo} alt="2-day CRM" width="400" height="100" />
             </div>
             <div className={styles.authFormUpper}>
                 Login to return to your CRM dashboard.

@@ -108,7 +108,7 @@ export default function Signup(){
     return (
         <div className={styles.authContainer}>
             <div>
-                <img src={logo} alt="2-day CRM" />
+                <img className={styles.authLogo} src={logo} alt="2-day CRM" width="400" height="100" />
             </div>
             <div className={styles.authForm}>
                 <div className={styles.authFormUpper}>
