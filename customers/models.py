@@ -27,21 +27,21 @@ class Customer(models.Model):
         
 
 
-# class Meeting(models.Model):
+class Meeting(models.Model):
 
-    # class MeetingTypes(models.TextChoices):
-    #     IN_PERSON = "IP", "In-Person"
-    #     PHONE_CALL = "PC", "Phone Call"
-    #     EMAIL = "EM", "Email"
-    #     CHAT_APP = "AC", "In-App Chat"
+    class MeetingTypes(models.TextChoices):
+        IN_PERSON = "IP", "In-Person"
+        PHONE_CALL = "PC", "Phone Call"
+        EMAIL = "EM", "Email"
+        CHAT_APP = "AC", "In-App Chat"
 
-    # subject = models.TextField()
-    # date = models.DateTimeField()
-    # contact_method = models.CharField(choices=MeetingTypes.choices, default=MeetingTypes.EMAIL)
-    # notes = models.TextField()
-    # customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="meetings")
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
+    subject = models.TextField()
+    date = models.DateTimeField()
+    contact_method = models.CharField(choices=MeetingTypes.choices, default=MeetingTypes.EMAIL, max_length=2)
+    notes = models.TextField()
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="meetings")
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return self.subject
+    def __str__(self):
+        return self.subject
