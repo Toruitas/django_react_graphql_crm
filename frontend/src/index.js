@@ -19,12 +19,22 @@ const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('refresh_token')
   // const token = Cookies.get('token') SHOULD BE USING COOKIES FOR BETTER SECURITY
 
-  return {
-    headers: {
-      ...headers,
-      authorization: `JWT ${token}`
+  if(token){
+      return {
+      headers: {
+        ...headers,
+        authorization: `JWT ${token}`
+      }
+    }
+  }else{
+    return {
+      headers: {
+        ...headers,
+      }
     }
   }
+
+  
 })
 
 const client = new ApolloClient({
