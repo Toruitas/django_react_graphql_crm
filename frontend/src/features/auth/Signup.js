@@ -62,7 +62,8 @@ const SignupForm = (props) => {
                 email:values.email,
                 password: values.password
             }
-            }).then(
+            })
+            .then(
                 (data)=>{
                     if(!data.errors){
                         loginMut({variables:{

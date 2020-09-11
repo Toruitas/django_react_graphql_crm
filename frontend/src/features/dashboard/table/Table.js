@@ -63,9 +63,9 @@ export default function Table(){
                             <td>
                                 {customer.createdBy.username}
                             </td>
-                            <td>
+                            {/* <td>
                                 <button className={"button"}>Add meeting</button>
-                            </td>
+                            </td> */}
                         </tr>
                         
                     ))}
