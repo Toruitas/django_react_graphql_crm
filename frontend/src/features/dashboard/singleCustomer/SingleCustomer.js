@@ -44,25 +44,32 @@ export default function SingleCustomer(){
 
     return (
         <div className={"container"}>
-            <div>
-                <div>
-                    Name: {data.customer.name}
+            <div className={"tile is-parent is-info"}>
+                <div className={"tile is-child"}>
+                    <p className="title">Name:</p>
+                    <p className={"subtitle"}>{data.customer.name}</p>
                 </div>
-                <div>
-                    Business: {data.customer.businessName}
+                <div className={"tile is-child"}>
+                    <p className="title">Business:</p>
+                    <p className={"subtitle"}>{data.customer.businessName}</p>
                 </div>
-                <div>
-                    Website: {data.customer.website}
+                <div className={"tile is-child"}>
+                    <p className="title">Website:</p>
+                    <p className={"subtitle"}>{data.customer.website}</p>
                 </div>
-                <div>
-                    Description: {data.customer.description}
+            </div>
+            <div className={"tile is-parent is-info"}>
+                <div className={"tile is-child"}>
+                    <p className="title">Description:</p>
+                    <p className={"subtitle"}>{data.customer.description}</p>
                 </div>
-                <div>
-                    Customer added: {moment(data.customer.createdAt).calendar()}
-                    
+                <div className={"tile is-child"}>
+                    <p className="title">Customer added:</p>
+                    <p className={"subtitle"}>{moment(data.customer.createdAt).calendar()}</p>
                 </div>
-                <div>
-                    Customer added by: {data.customer.createdBy.username}
+                <div className={"tile is-child"}>
+                    <p className="title">Customer added by:</p>
+                    <p className={"subtitle"}>{data.customer.createdBy.username}</p>
                 </div>
             </div>
             <NavLink to={"/customer/create/"}>

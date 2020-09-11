@@ -142,7 +142,7 @@ const CreateCustomerForm = () => {
                 ) : null}
             </div>
             <div className="field">
-                <label htmlFor="website">Email</label>
+                <label htmlFor="website">Website</label>
                 <div className="control">
                     <input 
                         className="input"
@@ -159,13 +159,14 @@ const CreateCustomerForm = () => {
                 ) : null}
             </div>
             <div className="field">
-                <label htmlFor="description">Email</label>
+                <label htmlFor="description">Description</label>
                 <div className="control">
-                    <input 
-                        className="input"
+                    <textarea  
+                        className="textarea"
+                        rows="10"
                         id='description'
                         name='description'
-                        type='text'
+                        type='textarea'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.description}
@@ -195,8 +196,9 @@ const CreateCustomerForm = () => {
 export default function CreateCustomer(){
      
     return (
-        <div>
-            <div>
+        <div className={"container"}>
+            <div className={styles.customerForm}>
+                Add a new customer. 
                 <CreateCustomerForm/>
             </div>
         </div>
