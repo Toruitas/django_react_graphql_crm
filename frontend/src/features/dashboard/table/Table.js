@@ -31,7 +31,9 @@ export default function Table(){
     return (
         <div className="container">
             <div className={styles.introLower}>
-                <button className={"button primary"}>Add a new customer</button>
+                <NavLink to={"/customer/create/"}>
+                    <button className={"button primary"}>Add a new customer</button>
+                </NavLink>
             </div>
             <table className={"table is-hoverable is-fullwidth"}>
                 <thead>
