@@ -62,27 +62,28 @@ const SignupForm = (props) => {
                 email:values.email,
                 password: values.password
             }
-            }).then(
-                (data)=>{
-                    if(!data.errors){
-                        loginMut({variables:{
-                            username: values.username,
-                            password: values.password
-                        }
-                        }).then(
-                            (data)=>{
-                                if(!data.errors){
-                                    localStorage.setItem('refresh_token', data.data.tokenAuth.token);
-                                    dispatch(loginAsync(loginMut, values, history));
-                                }
-                            }
-                        )
-                        // dispatch message
-                    }else{
-                        console.log(data.errors);
-                    }
-                }
-            )
+            })
+            // .then(
+            //     (data)=>{
+            //         if(!data.errors){
+            //             loginMut({variables:{
+            //                 username: values.username,
+            //                 password: values.password
+            //             }
+            //             }).then(
+            //                 (data)=>{
+            //                     if(!data.errors){
+            //                         localStorage.setItem('refresh_token', data.data.tokenAuth.token);
+            //                         dispatch(loginAsync(loginMut, values, history));
+            //                     }
+            //                 }
+            //             )
+            //             // dispatch message
+            //         }else{
+            //             console.log(data.errors);
+            //         }
+            //     }
+            // )
         }        
     });
 
