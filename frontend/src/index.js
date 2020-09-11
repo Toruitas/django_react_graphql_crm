@@ -11,7 +11,9 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
-const httpLink = createHttpLink({ uri: 'http://localhost:8000/graphql/' })
+let host = window.location.host;
+
+const httpLink = createHttpLink({ uri: host+'/graphql/' })
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('refresh_token')
