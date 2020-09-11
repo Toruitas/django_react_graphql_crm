@@ -18,7 +18,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-const SignupForm = () => {
+const SignupForm = (props) => {
     const formik = useFormik({
         initialValues:{
             username:'',
@@ -87,7 +87,7 @@ const SignupForm = () => {
                         type='password'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.username}
+                        value={formik.values.password}
                     />
                 </div>
                 {formik.touched.password && formik.errors.password ? (
@@ -108,10 +108,12 @@ export default function Signup(){
     return (
         <div className={styles.authContainer}>
             <div>
-                <img src={logo} alt="2-dat CRM" />
+                <img src={logo} alt="2-day CRM" />
             </div>
             <div className={styles.authForm}>
-                Sign up to gain access to the least-powerful CRM in existence!
+                <div className={styles.authFormUpper}>
+                    Sign up to gain access to the least-powerful CRM in existence!
+                </div>
                 <SignupForm />
                 If you've already signed up, please <NavLink to={"/login/"}>login</NavLink>.
             </div>
