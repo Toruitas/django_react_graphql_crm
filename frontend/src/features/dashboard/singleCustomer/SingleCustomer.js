@@ -65,6 +65,9 @@ export default function SingleCustomer(){
                     Customer added by: {data.customer.createdBy.username}
                 </div>
             </div>
+            <NavLink to={"/customer/create/"}>
+                <button className={"button primary"}>Add a new customer</button>
+            </NavLink>
         </div>
     )
 
