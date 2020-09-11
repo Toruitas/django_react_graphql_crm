@@ -11,7 +11,7 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
-let host = window.location.host;
+let host = window.location.origin;
 
 const httpLink = createHttpLink({ uri: host+'/graphql/' })
 
