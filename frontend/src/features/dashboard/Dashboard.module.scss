@@ -1,3 +1,19 @@
 .dashContainer{
     
 }
+
+.intro{
+    padding:1rem;
+    margin: 1.5rem;
+    box-shadow: 0.5rem 0.25rem rgb(0,0,0,0.1); 
+}
+
+.introLower > button{
+    margin:0 auto;
+    margin-top: 1rem;
+    margin-bottom:1rem;
+}
+
+.introLower{
+    display:flex;
+}

@@ -29,39 +29,45 @@ export default function Table(){
     if (error) return `Error! ${error.message}`;
      
     return (
-        <table className={"table is-hoverable is-fullwidth"}>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Business</th>
-                    <th>Website</th>
-                    <th>Created At</th>
-                    <th>Contacted By</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.customers.map(customer=>(
-                    <tr key={customer.lookupId}>
-                        <th>
-                            {customer.name}
-                        </th>
-                        <td>
-                            {customer.businessName}
-                        </td>
-                        <td>
-                            <a href={customer.website}>Link</a>
-                        </td>
-                        <td>
-                            {moment(customer.createdAt).calendar()}
-                        </td>
-                        <td>
-                            {customer.createdBy.username}
-                        </td>
+        <div className="container">
+            <table className={"table is-hoverable is-fullwidth"}>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Business</th>
+                        <th>Website</th>
+                        <th>Created At</th>
+                        <th>Contacted By</th>
                     </tr>
+                </thead>
+                <tbody>
+                    {data.customers.map(customer=>(
+                        <tr key={customer.lookupId}>
+                            <th>
+                                {customer.name}
+                            </th>
+                            <td>
+                                {customer.businessName}
+                            </td>
+                            <td>
+                                <a href={customer.website}>Link</a>
+                            </td>
+                            <td>
+                                {moment(customer.createdAt).calendar()}
+                            </td>
+                            <td>
+                                {customer.createdBy.username}
+                            </td>
+                            <td>
+                                <button className={"button"}>Add meeting</button>
+                            </td>
+                        </tr>
+                        
+                    ))}
                     
-                ))}
-                
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        
     )
 }
