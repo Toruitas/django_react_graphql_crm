@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from "moment" ;
@@ -30,6 +30,9 @@ export default function Table(){
      
     return (
         <div className="container">
+            <div className={styles.introLower}>
+                <button className={"button primary"}>Add a new customer</button>
+            </div>
             <table className={"table is-hoverable is-fullwidth"}>
                 <thead>
                     <tr>
@@ -44,7 +47,7 @@ export default function Table(){
                     {data.customers.map(customer=>(
                         <tr key={customer.lookupId}>
                             <th>
-                                {customer.name}
+                                <NavLink to={"/customer/"+customer.lookupId+"/"}>{customer.name}</NavLink>
                             </th>
                             <td>
                                 {customer.businessName}

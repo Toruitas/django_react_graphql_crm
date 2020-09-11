@@ -24,7 +24,7 @@ class CustomerType(DjangoObjectType):
 class CustomerFilter(django_filters.FilterSet):
     class Meta:
         model = Customer
-        fields = ["id","name","business_name","created_at"]
+        fields = ["id","name","business_name","created_at"]  # does this even do anything?
 
 class Query(graphene.ObjectType):
     customer = graphene.Field(CustomerType, lookup_id=graphene.String(required=True))

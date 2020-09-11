@@ -28,6 +28,7 @@ export function Navbar(){
 
             <div className="navbar-menu">
                 <div className="navbar-start">
+                    <NavLink className={"navbar-item"} to={"/dashboard/"}>Dashboard</NavLink>
                 </div>
                 <div className="navbar-end">
                     { loggedIn ? (

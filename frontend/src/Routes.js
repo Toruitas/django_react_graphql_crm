@@ -7,6 +7,8 @@ const Home = lazy(() => import('./features/home/Home'));
 const Login = lazy(() => import('./features/auth/Login'));
 const Signup = lazy( () => import('./features/auth/Signup'));
 const Dashboard = lazy(() => import('./features/dashboard/Dashboard'));
+const SingleCustomer = lazy(() => import('./features/dashboard/singleCustomer/SingleCustomer'));
+
 // const Profile = lazy(() => import('./Accounts/Profile'));
 
 export function Switcher () {
@@ -15,6 +17,7 @@ export function Switcher () {
             <Route exact path="/login/" component={props => <Login {...props}/>}/>
             <Route exact path="/signup/" component={props => <Signup {...props} />}/>
             <PrivateRoute exact path="/dashboard/" component={props => <Dashboard {...props} />}/>
+            <PrivateRoute exact path="/customer/:lookupId" component={props => <SingleCustomer {...props} />}/>
             {/* <PrivateRoute exact path={"/profile/"} component={props => <Profile {...props}/>}/> */} 
             <Route exact path="/" component={props => <Home {...props}/>}/>
         </Switch>
