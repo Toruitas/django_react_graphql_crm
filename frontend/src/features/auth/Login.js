@@ -1,11 +1,15 @@
 import React, { Component, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import logo from './generic_logo_lg.png';
-import { gql, useMutation } from '@apollo/client';
-import styles from "./Auth.module.scss";
 import { NavLink } from 'react-router-dom';
+import { gql, useMutation } from '@apollo/client';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+
+
+import logo from './generic_logo_lg.png';
+import styles from "./Auth.module.scss";
+import {loginAsync, selectLoggedIn} from './authSlice';
 
 
 const LOGIN_MUTATION = gql`
@@ -16,7 +20,11 @@ mutation TokenAuthMutation($username: String!,  $password: String!) {
 }
 `;
 
-const LoginForm = (props) => {
+const LoginForm = () => {
+    const [loginMut, { loading, error, data }] = useMutation(LOGIN_MUTATION, {errorPolicy:'all'});
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues:{
             username:'',
@@ -24,15 +32,21 @@ const LoginForm = (props) => {
         },
         validationSchema: Yup.object({
             username: Yup.string()
-              .min(6, 'Must be 6 characters or more')
+              .min(5, 'Must be 5 characters or more')
               .required('Required'),
             password: Yup.string()
               .min(8, 'Must be 8 characters or more')
               .required('Required'),
           }),
         onSubmit: values =>{
-            alert(JSON.stringify(values, null, 2));
-        }        
+            const refresh_token = loginMut({variables:{
+                    username: values.username,
+                    password: values.password
+                }
+            });
+            localStorage.setItem('refresh_token', refresh_token);
+            dispatch(loginAsync(loginMut, values, history));
+        }
     });
 
     return(
@@ -71,6 +85,13 @@ const LoginForm = (props) => {
                 <div>{formik.errors.password}</div>
                 ) : null}
             </div>
+            {error && (
+                <pre>{error.graphQLErrors.map(({ message }, i) => (
+                    <span key={i}>{message}</span>
+                ))}
+                </pre>
+            )}
+            
             <div className="field">
                 <div className="control">
                     <button className="button is-link" type="submit">Submit</button>
@@ -81,6 +102,8 @@ const LoginForm = (props) => {
 }
 
 export default function Login(){
+    const loggedIn = useSelector(selectLoggedIn);
+
      
     return (
         <div className={styles.authContainer}>
@@ -91,7 +114,7 @@ export default function Login(){
                 Login to return to your CRM dashboard.
             </div>
             <div className={styles.authForm}>
-                <LoginForm />
+            <LoginForm/>
                 If you're not already signed up, please <NavLink to={"/signup/"}>signup</NavLink> to gain access to the least-powerful CRM in existence!
             </div>
         </div>

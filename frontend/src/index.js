@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
-  uri: 'localhost:8000',
+  uri: 'http://localhost:8000/graphql/',
   cache: new InMemoryCache()
 });
 

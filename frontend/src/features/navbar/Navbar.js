@@ -1,10 +1,14 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom'
 import styles from './Navbar.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import {logoutAsync, selectLoggedIn} from '../auth/authSlice';
+import { useHistory } from 'react-router-dom'
 
 export function Navbar(){
-    const authToken = localStorage.getItem('refresh_token');
-
+    const loggedIn = useSelector(selectLoggedIn);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     return (
         <nav className="navbar is-fixed-top is-transparent">
@@ -23,11 +27,8 @@ export function Navbar(){
                 <div className="navbar-start">
                 </div>
                 <div className="navbar-end">
-                    { authToken ? (
-                        <NavLink className="navbar-item" onClick={() => {
-                            localStorage.removeItem('refresh_token');
-                            this.props.history.push(`/`)
-                        }}>Logout</NavLink>
+                    { loggedIn ? (
+                        <a className="navbar-item" onClick={() => dispatch(logoutAsync(history))}>Logout</a>
                     ) : (<>
                             <NavLink className="navbar-item" to={'/login/'}>
                                 Login
